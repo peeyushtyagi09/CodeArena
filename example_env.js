@@ -2,5 +2,19 @@ require("dotenv").config();
 
 const PORT = process.env.PORT;
 const MONGODB_URL = process.env.MONGODB_URL;
+const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET;
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
+const JWT_ACCESS_EXPIRED = process.env.JWT_ACCESS_EXPIRED;
+const JWT_REFRESH_EXPIRES = process.env.JWT_REFRESH_EXPIRES;
+const SMTP_HOST = process.env.SMTP_HOST;
+const SMTP_PORT = process.env.SMTP_PORT;
+const SMTP_USER = process.env.SMTP_USER;
+const SMTP_PASS = process.env.SMTP_PASS;
+const SMTP_FROM = process.env.SMTP_FROM;
+const OTP_LENGTH = process.env.OTP_LENGTH;
+const OTP_TTL_SECONDS = process.env.OTP_TTL_SECONDS;
+const OTP_MAX_ATTEMPTS = process.env.OTP_MAX_ATTEMPTS;
+const RATE_LIMIT_WINDOW_MS = process.env.RATE_LIMIT_WINDOW_MS;
+const RATE_LIMIT_MAX = process.env.RATE_LIMIT_MAX;  
 
-module.exports = { PORT, MONGODB_URL };
+module.exports = { PORT, MONGODB_URL,  JWT_ACCESS_SECRET, JWT_REFRESH_SECRET, JWT_ACCESS_EXPIRED, JWT_REFRESH_EXPIRES, SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM, OTP_LENGTH, OTP_TTL_SECONDS, OTP_MAX_ATTEMPTS, RATE_LIMIT_WINDOW_MS, RATE_LIMIT_MAX };
