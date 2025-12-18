@@ -1,8 +1,8 @@
 import axios from "axios";
 
-// The property should be 'baseURL' (not 'baseUrl'), and ensure REACT_APP_BACKEND_URL is used since React only exposes env vars prefixed with REACT_APP_ by default
+// Vite uses import.meta.env for environment variables, prefixed with VITE_
 const api = axios.create({
-    baseURL: process.env.REACT_APP_BACKEND_URL,
+    baseURL: import.meta.env.VITE_BACKEND_URL || "http://localhost:3000",
     withCredentials: true,
 })
 
