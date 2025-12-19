@@ -1,14 +1,32 @@
 import React from "react";
-import SignIn from "./components/signin";
-import Signup from "./components/signup";
-function App() {
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./auth/AuthContext";
+
+import Register from "./pages/Register";
+import VerifyEmail from "./pages/VerifyEmail";
+import Login from "./pages/Login";
+import LoginOtp from "./pages/LoginOtp";
+import Dashboard from "./pages/Dashboard";
+export default function App() {
   return (
-    <div className="App">
-      <div className="">
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/register" element={<Register />} />
+          <Route path="/verify" element={<VerifyEmail />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/login-otp" element={<LoginOtp />} />
 
-      </div>
-    </div>
-  )
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  );
 }
-
-export default App;
