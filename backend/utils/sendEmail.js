@@ -23,7 +23,6 @@ async function sendEmail({ to, subject, text, html }) {
         html,
     });
 }
-
 async function sendOtpEmail(to, code, purpose) {
     const title = purpose === "verify" ? "Verify your email" : "Your login code";
     const text = `Your ${purpose} code is ${code}. It will expire soon. Do not share it with anyone.`;
