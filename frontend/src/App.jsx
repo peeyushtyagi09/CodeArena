@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ProtectedRoute from "./auth/AuthContext";
+import { AuthProvider } from "./auth/AuthContext";
+import ProtectedRoute from "./auth/ProtectedRoute";
 
 import Register from "./pages/Register";
 import VerifyEmail from "./pages/VerifyEmail";

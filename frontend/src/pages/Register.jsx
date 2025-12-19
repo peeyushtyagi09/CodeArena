@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 
@@ -19,12 +19,12 @@ export default function Register() {
     };
 
     return (
-        <from onSubmit={submit} className="max-w-sm mx-auto mt-20 space-y-4">
+        <form onSubmit={submit} className="max-w-sm mx-auto mt-20 space-y-4">
             <h1 className="text-xl font-semibold">Register</h1>
-            <input className="input" placeholder="Email" onChnage={e => setEmail(e.target.value)} />
-            <input  className="input" placeholder="password" onChnage={e => setpassword(e.target.value)}/>
+            <input className="input" placeholder="Email" onChange={e => setEmail(e.target.value)} />
+            <input  className="input" placeholder="password" onChange={e => setpassword(e.target.value)}/>
             <button className="btn" > Create account</button>
             {msg && <p className="text-red-500">{msg}</p>}
-        </from>
+        </form>
     )
 }

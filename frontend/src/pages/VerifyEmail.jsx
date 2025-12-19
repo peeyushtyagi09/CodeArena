@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
-import api from "../api/axios";
+import React, { useState } from "react";
+import api from "../api/api";
 
 export default function VerifyEmail() {
     const { state } = useLocation();

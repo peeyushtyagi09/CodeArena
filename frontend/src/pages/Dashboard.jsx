@@ -1,5 +1,5 @@
-import api from "../api/axios";
-import { useContext } from "react";
+import api from "../api/api";
+import React, { useContext } from "react";
 import { AuthContext } from "../auth/AuthContext";
 
 export default function Dashboard() {

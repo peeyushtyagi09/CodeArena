@@ -19,7 +19,7 @@ app.use(globalLimiter);
 // calling mongodb function
 connectDB();
 
-app.get("/", (req, res) => {
+app.get("/", (req, res) => { 
     console.log("That is working");
 })
 

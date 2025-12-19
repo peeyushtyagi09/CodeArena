@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import api from "../api/axios";
+import React, { useContext, useState } from "react";
+import api from "../api/api";
 import { AuthContext } from "../auth/AuthContext";
 
 export default function Login() {
@@ -14,7 +14,7 @@ export default function Login() {
             const r = await api.post("/login", { email, password });
             login(r.data.accessToken, r.data.refreshToken);
         }catch(e) {
-            setMsg(e.reponse?.data.error)
+            setMsg(e.response?.data.error)
         }
     };
 

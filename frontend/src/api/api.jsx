@@ -1,8 +1,10 @@
 import axios from "axios";
 
 // Vite uses import.meta.env for environment variables, prefixed with VITE_
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const api = axios.create({
-    baseURL: `${import.meta.env.VITE_BACKEND_URL}/auth`, 
+    baseURL: `${BACKEND_URL}/auth`, 
 });
 
 api.interceptors.request.use(config => {
@@ -20,7 +22,7 @@ api.interceptors.response.use(
             
             try {
                 const r = await axios.post(
-                    `${import.meta.env.VITE_BACKEND_URL}/auth/token/refresh`,
+                    `${BACKEND_URL}/auth/token/refresh`,
                     {token: refreshToken}
                 );
                 localStorage.setItem("accessToken", r.data.accessToken);
@@ -30,7 +32,7 @@ api.interceptors.response.use(
                 return axios(err.config);
             }catch {
                 localStorage.clear();
-                window.location.herf = "/login";
+                window.location.href = "/login";
             }
         }
         return Promise.reject(err);

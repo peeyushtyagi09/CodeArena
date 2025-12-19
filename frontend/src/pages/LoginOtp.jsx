@@ -1,5 +1,5 @@
-import { useState, useContext } from "react";
-import api from "../api/axios";
+import React, { useState, useContext } from "react";
+import api from "../api/api";
 import { AuthContext } from "../auth/AuthContext";
 
 export default function LoginOtp() {
