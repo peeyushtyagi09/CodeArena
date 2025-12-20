@@ -104,7 +104,7 @@ exports.verifyLoginOtp = async (req, res) => {
     const token = await OtpToken.findOne({ user: user._id, purpose: "login", consumed: false}).sort({ createdAt: -1});
     
     if(!token || token.expiresAt < new Date()) return res.status(400).json({ error: "Otp expired or not found"});
-    if(token.attempts >= env.OTP_MAX_ATTEMPTS) return res.staus(429).json({ error: "Max attempts exceeded "});
+    if(token.attempts >= env.OTP_MAX_ATTEMPTS) return res.status(429).json({ error: "Max attempts exceeded "});
 
     const ok = await bcrypt.compare(otp, token.codeHash);
     if(!ok) {
@@ -137,7 +137,7 @@ exports.refreshToken = async (req, res) => {
 
 exports.logoutEverywhere = async (req, res) => {
     const user = await User.findById(req.user.id);
-    if(!user) return res.status(404).json({ erro : "User not found "});
+    if(!user) return res.status(404).json({ error : "User not found "});
     user.tokenVersion += 1;
     await user.save();
     return res.json({ message: "Logged out from all sessions "});
