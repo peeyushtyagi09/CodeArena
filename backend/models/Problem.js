@@ -37,4 +37,4 @@ const ProblemSchema = new mongoose.Schema({
     }
 }, {timestamps: true}); // we use timestamps becase it automatically manages ywo data field in your database : 1 -> createdAt, 2 -> updatedAt
 
-module.exports = mongoose.model("Problem", ProblemSchema);
+module.exports = mongoose.model("problem", ProblemSchema);

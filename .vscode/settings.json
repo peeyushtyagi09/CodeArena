@@ -1,0 +1,24 @@
+{
+  // Disable autocomplete suggestions while typing
+  "editor.quickSuggestions": {
+    "other": false,
+    "comments": false,
+    "strings": false
+  },
+  
+  // Disable suggestions on trigger characters (like . or ( )
+  "editor.suggestOnTriggerCharacters": false,
+  
+  // Disable accepting suggestions when typing commit characters
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  
+  // Disable word-based suggestions
+  "editor.wordBasedSuggestions": "off",
+  
+  // Disable parameter hints
+  "editor.parameterHints.enabled": false,
+  
+  // Disable inline suggestions (AI autocomplete)
+  "editor.inlineSuggest.enabled": false
+}
+
