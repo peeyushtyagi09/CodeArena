@@ -14,7 +14,7 @@ const PlayerSchema = new mongoose.Schema({
 const BattleSchema = new mongoose.Schema({
     problem: {
         type: mongoose.Schema.Types.ObjectId, 
-        ref: "problem",
+        ref: "Problem",
         required: true, 
     },
     players: {
