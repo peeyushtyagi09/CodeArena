@@ -1,9 +1,10 @@
 # Backend API - CodeArena
 
-A secure, production-ready authentication API built with Express.js and MongoDB. This backend service provides comprehensive authentication features including email/password registration, OTP-based email verification, password and OTP login options, JWT token management, and secure logout functionality.
+A secure, production-ready competitive coding platform API built with Express.js and MongoDB. This backend service provides comprehensive authentication features, problem management, real-time coding battles, and submission tracking. Users can compete in head-to-head coding challenges, track their problem-solving history, and improve their coding skills.
 
 ## 🚀 Features
 
+### Authentication
 - **User Registration**: Email/password sign-up with automatic OTP verification
 - **Email Verification**: OTP-based email verification system
 - **Multiple Login Methods**: Password-based and OTP-based login options
@@ -11,6 +12,16 @@ A secure, production-ready authentication API built with Express.js and MongoDB.
 - **Token Management**: Token refresh and logout-all functionality
 - **Security**: Rate limiting, request validation, CORS, and Helmet security headers
 - **OTP System**: Secure OTP generation with expiration and attempt limits
+
+### Competitive Coding
+- **Problem Management**: Create and manage coding problems with multiple difficulty levels
+- **Problem Categorization**: Organize problems by topics and difficulty (easy, medium, hard)
+- **Test Case System**: Support for visible test cases (3) and hidden test cases (10)
+- **Battle System**: Real-time coding battles between two players
+- **Battle Status**: Track battle lifecycle (waiting, live, finished)
+- **Submission Tracking**: Record code submissions with verdicts, runtime, and approach
+- **User History**: Track which problems users have seen and when
+- **Problem Deduplication**: Hash-based system to prevent duplicate problems
 
 ## 📋 Tech Stack
 
@@ -37,7 +48,11 @@ backend/
 │   └── authConroller.js    # Authentication business logic handlers
 ├── models/
 │   ├── User.js             # User Mongoose model
-│   └── OtpToken.js         # OTP token Mongoose model
+│   ├── OtpToken.js         # OTP token Mongoose model
+│   ├── Problem.js          # Coding problem model
+│   ├── Battle.js           # Battle/competition model
+│   ├── Submission.js       # Code submission model
+│   └── UserProblemHistory.js  # User problem tracking model
 ├── middleware/
 │   ├── auth.js             # JWT authentication middleware
 │   ├── validate.js         # Request validation middleware
@@ -288,13 +303,74 @@ Authorization: Bearer <accessToken>
 - **JWT Tokens**: Secure token-based authentication with refresh token rotation
 - **OTP Security**: Time-limited OTPs with attempt limits and secure hashing
 
+## 📊 Data Models
+
+### User Model
+- `email`: Unique email address (indexed)
+- `passwordHash`: Bcrypt hashed password
+- `isVerified`: Email verification status
+- `tokenVersion`: Token invalidation counter for logout-all functionality
+- `timestamps`: createdAt, updatedAt
+
+### OtpToken Model
+- `user`: Reference to User model
+- `purpose`: Enum ["login", "verify"]
+- `codeHash`: Bcrypt hashed OTP code
+- `attempts`: Failed verification attempts counter
+- `consumed`: Whether OTP has been used
+- `expiresAt`: Expiration timestamp (with TTL index)
+- `timestamps`: createdAt, updatedAt
+
+### Problem Model
+- `title`: Problem title (trimmed, searchable)
+- `statement`: Problem description
+- `difficulty`: Enum ["easy", "medium", "hard"] (indexed)
+- `topics`: Array of topic strings (indexed)
+- `visibleTestCases`: Array of 3 test cases (input, output)
+- `hiddenTestCases`: Array of 10 test cases (input, output)
+- `problemHash`: Unique hash for deduplication (indexed)
+- `timestamps`: createdAt, updatedAt
+
+### Battle Model
+- `problem`: Reference to Problem model
+- `players`: Array of 2 players with:
+  - `user`: Reference to User model (indexed)
+  - `score`: Player score
+  - `hasSubmitted`: Submission status
+- `status`: Enum ["waiting", "live", "finished"] (indexed)
+- `startedAt`: Battle start timestamp
+- `endedAt`: Battle end timestamp
+- `timestamps`: createdAt, updatedAt
+
+### Submission Model
+- `battle`: Reference to Battle model
+- `user`: Reference to User model
+- `language`: Programming language used
+- `code`: Submitted code
+- `verdict`: Enum ["pending", "accepted", "wrong_answer", "runtime_error", "time_limit_exceeded"]
+- `runtimeMs`: Execution time in milliseconds
+- `approachText`: Explanation of approach
+- `isFinal`: Whether this is the final submission
+- `timestamps`: createdAt, updatedAt
+
+### UserProblemHistory Model
+- `user`: Reference to User model (indexed)
+- `problem`: Reference to Problem model (indexed)
+- `firstSeenAt`: First time user viewed the problem
+- `timestamps`: createdAt, updatedAt
+- **Unique Index**: (user, problem) to prevent duplicates
+
 ## 🧪 Testing
 
 Currently, no automated tests are included. Recommended testing additions:
 
-- **Unit Tests**: Token helpers, OTP generation/validation utilities
-- **Integration Tests**: Complete auth flows (register → verify → login → refresh → logout)
-- **E2E Tests**: Full user authentication scenarios
+- **Unit Tests**: Token helpers, OTP generation/validation utilities, problem validation
+- **Integration Tests**: 
+  - Complete auth flows (register → verify → login → refresh → logout)
+  - Problem CRUD operations
+  - Battle creation and management
+  - Submission processing and verdicts
+- **E2E Tests**: Full user authentication scenarios, battle flow, submission flow
 
 Consider using testing frameworks like:
 - **Jest** or **Mocha** for unit/integration tests
