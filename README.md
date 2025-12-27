@@ -5,6 +5,7 @@ A full-stack competitive coding platform built with modern web technologies. Cod
 ## 📋 Table of Contents
 
 - [Overview](#overview)
+- [Project Phases](#project-phases)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
@@ -26,6 +27,64 @@ CodeArena is a competitive coding platform consisting of:
 
 This project demonstrates industry-standard practices for building secure, scalable competitive coding platforms with real-time battle functionality.
 
+**Current Phase**: Phase 2 - Problem Ingestion (AI + Validation)
+
+## 🗺️ Project Phases
+
+### Phase 1: Foundation & Authentication ✅
+**Status**: Completed
+
+- User authentication system with email/password
+- OTP-based email verification
+- JWT token management
+- Database models for User, OtpToken
+- Security middleware (rate limiting, validation, CORS, Helmet)
+- Basic project structure and infrastructure
+
+### Phase 2: Problem Ingestion (AI + Validation) 🚧
+**Status**: In Progress
+
+**Goal**: Create a safe, auditable pipeline to generate problems using AI, validate them, and store them in the database. This phase ensures questions and test cases exist before any battles can be created.
+
+**Key Objectives**:
+- **AI Problem Generation**: Integrate AI service to generate coding problems automatically
+- **Problem Validation**: Implement comprehensive validation pipeline for generated problems
+- **Test Case Generation**: Ensure proper test case generation (3 visible + 10 hidden)
+- **Audit Trail**: Maintain complete audit logs for problem generation and validation
+- **Safe Storage**: Store validated problems in database with proper deduplication
+- **Quality Assurance**: Verify problem quality, difficulty accuracy, and test case correctness
+
+**Components**:
+- AI integration service for problem generation
+- Problem validation pipeline
+- Test case validation and verification
+- Problem hash generation for deduplication
+- Audit logging system
+- Problem storage and management APIs
+
+**Deliverables**:
+- ✅ Problem model with test cases and metadata
+- 🚧 AI problem generation service
+- 🚧 Problem validation pipeline
+- 🚧 Problem ingestion API endpoints
+- 🚧 Audit logging system
+
+### Phase 3: Battle System (Planned)
+**Status**: Planned
+
+- Real-time battle creation and matching
+- Battle lifecycle management
+- Player matching system
+- Battle status tracking
+
+### Phase 4: Submission & Judging (Planned)
+**Status**: Planned
+
+- Code submission handling
+- Code execution and judging
+- Verdict generation
+- Runtime tracking
+
 ## ✨ Features
 
 ### Authentication Features
@@ -41,12 +100,15 @@ This project demonstrates industry-standard practices for building secure, scala
 - ✅ Problem management system with multiple difficulty levels (easy, medium, hard)
 - ✅ Problem categorization by topics
 - ✅ Test case management (visible and hidden test cases)
-- ✅ Real-time coding battles between two players
-- ✅ Battle status tracking (waiting, live, finished)
-- ✅ Code submission system with multiple verdicts
-- ✅ Submission tracking with runtime and approach documentation
-- ✅ User problem history tracking
 - ✅ Problem hash-based deduplication
+- ✅ User problem history tracking
+- 🚧 AI-powered problem generation pipeline
+- 🚧 Automated problem validation system
+- 🚧 Problem audit trail and logging
+- ⏳ Real-time coding battles between two players
+- ⏳ Battle status tracking (waiting, live, finished)
+- ⏳ Code submission system with multiple verdicts
+- ⏳ Submission tracking with runtime and approach documentation
 
 ### Security Features
 - ✅ Password hashing with bcrypt
@@ -74,6 +136,7 @@ This project demonstrates industry-standard practices for building secure, scala
 - **Email**: Nodemailer 7.0.11
 - **Security**: Helmet, CORS, express-rate-limit
 - **Validation**: express-validator 7.3.1
+- **AI Integration**: (Phase 2 - To be added)
 
 ### Frontend
 - **Framework**: React 19.2.0
@@ -89,6 +152,8 @@ This project demonstrates industry-standard practices for building secure, scala
 CodeArena/
 ├── backend/                 # Backend API server
 │   ├── controllers/        # Request handlers
+│   │   ├── authConroller.js  # Authentication controller
+│   │   └── (Phase 2) problemController.js  # Problem management
 │   ├── db/                 # Database connection
 │   ├── middleware/         # Auth, validation, rate limiting
 │   ├── models/             # Mongoose models
@@ -99,6 +164,12 @@ CodeArena/
 │   │   ├── Submission.js   # Code submission model
 │   │   └── UserProblemHistory.js  # User problem tracking
 │   ├── routes/             # API routes
+│   │   ├── authRoutes.js   # Authentication routes
+│   │   └── (Phase 2) problemRoutes.js  # Problem routes
+│   ├── services/           # Business logic services (Phase 2)
+│   │   ├── (Phase 2) aiService.js  # AI problem generation
+│   │   ├── (Phase 2) problemValidator.js  # Problem validation
+│   │   └── (Phase 2) auditLogger.js  # Audit logging
 │   ├── utils/              # Utility functions
 │   ├── index.js            # Server entry point
 │   └── README.md           # Backend documentation
@@ -194,6 +265,13 @@ SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_USER=your-email@gmail.com
 SMTP_PASS=your-app-password
+
+# Phase 2: AI Problem Generation (Optional - add when implementing)
+# AI_API_KEY=your-ai-api-key
+# AI_API_URL=https://api.openai.com/v1
+# AI_MODEL=gpt-4
+# AI_MAX_RETRIES=3
+
 # ... (see backend/README.md for complete list)
 ```
 
@@ -223,6 +301,15 @@ http://localhost:3000/api
 - `POST /api/auth/login/otp/verify` - Login with OTP
 - `POST /api/auth/token/refresh` - Refresh access token
 - `POST /api/auth/logout-everywhere` - Logout from all devices (protected)
+
+### Problem Management Endpoints (`/api/problems`) - Phase 2 🚧
+
+- `POST /api/problems/generate` - Generate problem using AI (protected, admin)
+- `POST /api/problems/validate` - Validate generated problem
+- `POST /api/problems` - Store validated problem in database (protected, admin)
+- `GET /api/problems` - List all problems (with filters)
+- `GET /api/problems/:id` - Get problem details
+- `GET /api/problems/audit/:id` - Get problem generation audit log (protected, admin)
 
 ### Data Models
 
@@ -286,6 +373,10 @@ Currently, automated tests are not included. Recommended additions:
 
 - **Backend**: Unit tests (Jest/Mocha), integration tests (Supertest)
   - Test authentication flows (register, verify, login)
+  - **Phase 2**: Test AI problem generation service
+  - **Phase 2**: Test problem validation pipeline
+  - **Phase 2**: Test problem deduplication logic
+  - **Phase 2**: Test audit logging system
   - Test problem CRUD operations
   - Test battle creation and management
   - Test submission processing and verdicts
@@ -336,11 +427,76 @@ The application uses MongoDB with the following main collections:
 - **users**: User accounts and authentication data
 - **otptokens**: OTP tokens for verification and login (with TTL index)
 - **problems**: Coding problems with test cases and metadata
+  - Includes: title, statement, difficulty, topics, visibleTestCases (3), hiddenTestCases (10), problemHash
 - **battles**: Competitive coding battles between players
 - **submissions**: Code submissions with verdicts and runtime data
 - **userproblemhistories**: User problem interaction history
+- **problem_audit_logs** (Phase 2): Audit trail for problem generation and validation
 
 All models include timestamps (createdAt, updatedAt) and appropriate indexes for performance.
+
+## 🔄 Phase 2: Problem Ingestion Pipeline
+
+### Overview
+
+Phase 2 focuses on creating a safe, auditable pipeline for AI-generated problems. The pipeline ensures that all problems are properly validated before being stored in the database.
+
+### Pipeline Flow
+
+```
+1. AI Problem Generation
+   ↓
+2. Problem Validation
+   ├── Structure Validation
+   ├── Test Case Validation
+   ├── Difficulty Verification
+   └── Topic Verification
+   ↓
+3. Hash Generation & Deduplication Check
+   ↓
+4. Audit Logging
+   ↓
+5. Database Storage
+```
+
+### Key Components
+
+#### 1. AI Problem Generation Service
+- Integrates with AI service (OpenAI, Anthropic, etc.)
+- Generates problems with:
+  - Title and problem statement
+  - Difficulty level (easy, medium, hard)
+  - Topics/tags
+  - Test cases (3 visible + 10 hidden)
+- Handles AI API errors and retries
+
+#### 2. Problem Validation Pipeline
+- **Structure Validation**: Ensures all required fields are present
+- **Test Case Validation**: Verifies exactly 3 visible and 10 hidden test cases
+- **Difficulty Validation**: Confirms difficulty matches problem complexity
+- **Topic Validation**: Validates topic relevance and format
+- **Test Case Correctness**: Validates input/output format and logic
+
+#### 3. Audit Trail System
+- Logs all problem generation attempts
+- Records validation results
+- Tracks approval/rejection decisions
+- Maintains history of problem modifications
+- Enables traceability and debugging
+
+#### 4. Safe Storage
+- Problem hash generation for deduplication
+- Prevents duplicate problems
+- Ensures data integrity
+- Maintains referential integrity with battles
+
+### Security Considerations
+
+- Admin-only access to problem generation endpoints
+- Rate limiting on AI API calls
+- Input sanitization for AI-generated content
+- Validation of all AI outputs before storage
+- Audit logs for compliance and debugging
 
 ---
 
