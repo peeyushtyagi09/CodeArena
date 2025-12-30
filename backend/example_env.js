@@ -22,6 +22,10 @@ const OTP_TTL_SECONDS = toNumber(process.env.OTP_TTL_SECONDS, 600);
 const OTP_MAX_ATTEMPTS = toNumber(process.env.OTP_MAX_ATTEMPTS, 5);
 const RATE_LIMIT_WINDOW_MS = toNumber(process.env.RATE_LIMIT_WINDOW_MS, 60000);
 const RATE_LIMIT_MAX = toNumber(process.env.RATE_LIMIT_MAX, 100);
+const AI_API_URL = process.env.AI_API_URL;
+const AI_API_KEY = process.env.AI_API_KEY;
+const AI_MODEL = process.env.AI_MODEL; 
+
 
 module.exports = {
     PORT,
@@ -40,4 +44,7 @@ module.exports = {
     OTP_MAX_ATTEMPTS,
     RATE_LIMIT_WINDOW_MS,
     RATE_LIMIT_MAX,
+    AI_API_URL,
+    AI_API_KEY,
+    AI_MODEL
 };

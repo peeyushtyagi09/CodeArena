@@ -1,5 +1,5 @@
 // src/services/aiPromptBuilder.js
-
+// the work of this file is to control What AI generate
 function buildProblemPrompt({ difficulty, topics }) {
     return `You are a coding interview question generator.
   
