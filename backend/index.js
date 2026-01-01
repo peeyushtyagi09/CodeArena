@@ -7,6 +7,7 @@ const helmet = require("helmet");
 const { connectDB } = require("./db/db");
 const { globalLimiter } = require("./middleware/ratelimiter");
 const authRoutes = require("./routes/authRoutes");
+const problemRoutes = require("./routes/adminProblemRoutes.js");
 
 const app = express();
 
@@ -25,6 +26,8 @@ app.get("/", (req, res) => {
 
 // adding routes
 app.use("/api/auth", authRoutes);
+app.use("/api/ai", problemRoutes);
+console.log("env.AI_API_KEY", env.AI_API_KEY);
 
 
 const port = env.PORT; 

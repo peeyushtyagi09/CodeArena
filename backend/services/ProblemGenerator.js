@@ -11,8 +11,11 @@ function hashStatement(statement){
 
 async function generateAndStoreProblem(config){
     const raw = await generateProblemwithAI(config);
+    console.log("RAW AI OUTPUT:\n", raw);
     const parsed = SafeJsonParse(raw);
+    console.log("PARSED JSON:\n", parsed);
     validateProblem(parsed);
+    console.log("VALIDATED PROBLEM:\n", parsed);
     const problemHash = hashStatement(parsed.statement);
     const exits = await Problem.findOne( { problemHash } );
     if(exits) {
