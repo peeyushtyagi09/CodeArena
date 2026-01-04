@@ -10,11 +10,7 @@ function validateProblem(p) {
       throw new Error("Invalid difficulty");
   
     if (!Array.isArray(p.visibleTests) || p.visibleTests.length !== 3)
-      throw new Error("Visible tests must be exactly 3");
-
-    if (typeof t.output !== "string") {
-        throw new Error(`Output must be string at index ${index}`);
-      }
+      throw new Error("Visible tests must be exactly 3"); 
       
     if (!Array.isArray(p.hiddenTests) || p.hiddenTests.length !== 10)
       throw new Error("Hidden tests must be exactly 10");
@@ -22,7 +18,10 @@ function validateProblem(p) {
     [...p.visibleTests, ...p.hiddenTests].forEach((t, index) => {
       if (!t.input || !t.output)
         throw new Error(`Invalid testcase at index ${index}`);
-    });
+    
+      if (typeof t.input !== "string" || typeof t.output !== "string")
+        throw new Error(`Input/Output must be string at index ${index}`);
+    });    
   
     return true;
   }

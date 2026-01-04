@@ -19,12 +19,12 @@ const ProblemSchema = new mongoose.Schema({
          index: true, 
          default: [], 
     },
-    visibleTestCases: {
+    visibleTests: {
         type: [TestCaseSchema],
         validate: v => v.length === 3,
         message: "exactly 3 visible test cases are required",
     },
-    hiddenTestCases: {
+    hiddenTests: {
         type: [TestCaseSchema],
         validate: v => v.length === 10,
         message: "exactly 10 hidden test cases are required",

@@ -15,7 +15,7 @@ console.log("AI_API_KEY exists:", !!env.AI_API_KEY);
       {
         model: env.AI_MODEL,
         messages: [{ role: "user", content: prompt }],
-        temperature: 0.9,
+        temperature: 0.2,
       },
       {
         headers: {
