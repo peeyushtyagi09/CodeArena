@@ -45,7 +45,38 @@ Allowed problemType.type values (choose ONE only):
 Rules:
 - problemType.type MUST be exactly one of the above values.
 - topic must be chosen ONLY from:
-  ["array", "string", "hash-map", "two-pointer", "sliding-window", "sorting", "binary-search", "prefix-sum", "matrix"]
+  [
+  "array",
+  "string",
+  "hash-map",
+  "hash-set",
+  "two-pointer",
+  "sliding-window",
+  "sorting",
+  "binary-search",
+  "prefix-sum",
+  "matrix",
+  "dynamic-programming",
+  "greedy",
+  "bit-manipulation",
+  "stack",
+  "queue",
+  "heap-priority-queue",
+  "math",
+  "backtracking",
+  "simulation",
+  "enumeration",
+  "number-theory",
+  "geometry",
+  "bitmask",
+  "divide-and-conquer",
+  "combinatorics",
+  "monotonic-stack",
+  "monotonic-queue",
+  "sliding-window-maximum",
+  "kadane-algorithm",
+  "boyer-moore-voting"
+]
 - Do NOT use tree, graph, or linked-list concepts.
 - keyOperation must clearly describe what logic is applied (used for test-case generation).
 - constraints must align with difficulty and problemType.
