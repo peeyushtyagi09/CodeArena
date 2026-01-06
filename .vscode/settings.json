@@ -1,24 +1,24 @@
 {
   // Disable autocomplete suggestions while typing
   "editor.quickSuggestions": {
-    "other": false,
-    "comments": false,
-    "strings": false
+    "other": true,
+    "comments": true,
+    "strings": true
   },
   
   // Disable suggestions on trigger characters (like . or ( )
-  "editor.suggestOnTriggerCharacters": false,
+  "editor.suggestOnTriggerCharacters": true,
   
   // Disable accepting suggestions when typing commit characters
-  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.acceptSuggestionOnCommitCharacter": true,
   
   // Disable word-based suggestions
-  "editor.wordBasedSuggestions": "off",
+  "editor.wordBasedSuggestions": "allDocuments",
   
   // Disable parameter hints
-  "editor.parameterHints.enabled": false,
+  "editor.parameterHints.enabled": true,
   
   // Disable inline suggestions (AI autocomplete)
-  "editor.inlineSuggest.enabled": false
+  "editor.inlineSuggest.enabled": true
 }
 

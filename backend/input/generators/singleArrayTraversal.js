@@ -26,8 +26,8 @@ function generateSingleArrayTraversal(metadata) {
       hidden: Array.from({ length: 10 }, () => ({
         type: "int[]",
         length: "byDifficulty",
-        min: -100000,
-        max: 100000
+        min: -100,
+        max: 100
       }))
     };
   }

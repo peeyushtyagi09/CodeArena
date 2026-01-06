@@ -31,7 +31,8 @@ Allowed problemType.type values (choose ONE only):
 
 1. "single-array-traversal"
 2. "array-index-logic"
-3. "two-pointer"
+// do not consider this topics
+{3. "two-pointer"
 4. "sliding-window-fixed"
 5. "sliding-window-variable"
 6. "hash-map-frequency"
@@ -40,7 +41,7 @@ Allowed problemType.type values (choose ONE only):
 9. "binary-search-on-answer"
 10. "string-parsing"
 11. "prefix-sum"
-12. "matrix-2d"
+12. "matrix-2d"}
 
 Rules:
 - problemType.type MUST be exactly one of the above values.
